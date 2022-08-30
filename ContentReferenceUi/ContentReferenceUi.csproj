@@ -43,16 +43,17 @@
   <ItemGroup>
     <None Include="BuildPackage.bat" />
     <None Include="build\ContentReferenceUi.targets" />
-    <None Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx.cs">
+    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx.cs">
       <DependentUpon>Usage.aspx</DependentUpon>
-    </None>
-    <None Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx.designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx.designer.cs">
       <DependentUpon>Usage.aspx.cs</DependentUpon>
-    </None>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="ContentReferenceUi.nuspec" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx">
       <SubType>ASPXCodeBehind</SubType>
