@@ -34,20 +34,29 @@ function SetFileProperties
     Write-Host $item.Name
     switch -Wildcard ( $item.Name )
     {
+        '*.designer.cs'
+        {
+            $dependentFileName = $item.Name.Replace(".designer","")
+            $item.AddMetaData("DependentUpon", $dependentFileName) 
+            # Continue to *.cs match
+        }
         '*.cs'
         {
             $message = "  Setting Build Action to Compile"
             $buildAction = 1
+            Break
         }
         '*.aspx'
         {
             $message = "  Setting Build Action to Content"
             $buildAction = 2
+            Break
         }
         '*.xml'
         {
             $message = "  Setting Build Action to Content"
             $buildAction = 2
+            Break
         }
         default
         {
