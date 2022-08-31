@@ -53,7 +53,7 @@
     </Content>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="ContentReferenceUi.nuspec" />
-    <None Include="packages.config" />
+    <None Include="tools\Install.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx">
