@@ -7,7 +7,7 @@
 		<authors>Kentico Community</authors>
 		<owners>Kentico Community</owners>
 		<projectUrl>https://github.com/heywills/xperience-content-reference-module-ui</projectUrl>
-		<icon>content/CMSModules/XperienceCommunity.ContentReferenceUi/CMSDesk/Properties/icon.png</icon>
+		<icon>content/CMSModules/KenticoCommunity.ContentReferenceUi/CMSDesk/Properties/icon.png</icon>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<license type="expression">MIT</license>
 		<description>$description$</description>
