@@ -7,8 +7,8 @@
     <ProjectGuid>{0374CEE8-6A4C-4BC9-AB21-2FE43366E92F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KenticoCommunity.ContentReferenceUi</RootNamespace>
-    <AssemblyName>KenticoCommunity.ContentReferenceUi</AssemblyName>
+    <RootNamespace>XperienceCommunity.ContentReferenceUi</RootNamespace>
+    <AssemblyName>XperienceCommunity.ContentReferenceUi</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,12 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BuildPackage.bat" />
-    <None Include="build\ContentReferenceUi.targets" />
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx.cs">
+    <Content Include="CMSModules\XperienceCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx.cs">
       <DependentUpon>Usage.aspx</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx.designer.cs">
+    <Content Include="CMSModules\XperienceCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx.designer.cs">
       <DependentUpon>Usage.aspx.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -56,14 +55,15 @@
     <None Include="tools\Install.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx">
+    <Content Include="CMSModules\XperienceCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx">
       <SubType>ASPXCodeBehind</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.xml">
+    <Content Include="CMSModules\XperienceCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\icon.png" />
+    <Content Include="CMSModules\XperienceCommunity.ContentReferenceUi\CMSDesk\Properties\icon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

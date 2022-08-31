@@ -7,7 +7,7 @@
 		<authors>Kentico Community</authors>
 		<owners>Kentico Community</owners>
 		<projectUrl>https://github.com/heywills/xperience-content-reference-module-ui</projectUrl>
-		<icon>content/CMSModules/KenticoCommunity.ContentReferenceUi/CMSDesk/Properties/icon.png</icon>
+		<icon>content/CMSModules/XperienceCommunity.ContentReferenceUi/CMSDesk/Properties/icon.png</icon>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<license type="expression">MIT</license>
 		<description>$description$</description>
@@ -16,11 +16,8 @@
 		<tags>Kentico Xperience Atomic Content References</tags>
 		<dependencies>
 			<dependency id="Kentico.Xperience.Libraries" version="[13.0.0,13.1.0)" />
-		</dependencies>
-		<contentFiles>
-				<!-- this sets "CopyIfNewer" on all files in the project that derive from this package --><!--
-				<files include="**/*" buildAction="None" copyToOutput="true"/>-->
-		</contentFiles>		
+      <dependency id="XperienceCommunity.ContentReferenceModule" version="[1.0.0,1.1.0)" />
+    </dependencies>
 	</metadata>
 	<files>
     <file src="CMSModules\*" target="CMSModules\" />
