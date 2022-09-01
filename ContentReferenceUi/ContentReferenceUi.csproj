@@ -545,7 +545,7 @@
       <SubType>ASPXCodeBehind</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.xml">
+    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\Grid\Usage.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\icon.png" />
