@@ -139,6 +139,9 @@
     <Reference Include="CMS.Personas, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.Personas.dll</HintPath>
     </Reference>
+    <Reference Include="CMS.PortalEngine.Web.UI">
+      <HintPath>..\Lib\CMS.PortalEngine.Web.UI.dll</HintPath>
+    </Reference>
     <Reference Include="CMS.Relationships, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.Relationships.dll</HintPath>
     </Reference>
@@ -526,29 +529,19 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="BuildPackage.bat" />
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx.cs">
-      <DependentUpon>Usage.aspx</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx.designer.cs">
-      <DependentUpon>Usage.aspx.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Compile Include="Constants\ResourceConstants.cs" />
+    <Compile Include="Constants\UiElementConstants.cs" />
     <Compile Include="Extenders\ContentReferenceUniGridExtender.cs" />
+    <Compile Include="Installers\ContentReferenceUiInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="ContentReferenceUi.nuspec" />
     <None Include="packages.config" />
     <None Include="tools\Install.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\Usage.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\Grid\Usage.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\CMSDesk\Properties\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.S3.3.3.104.36\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
