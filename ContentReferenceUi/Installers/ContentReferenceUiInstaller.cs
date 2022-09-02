@@ -3,12 +3,13 @@ using CMS.Modules;
 using CMS.PortalEngine;
 using CMS.SiteProvider;
 using KenticoCommunity.ContentReferenceUi.Constants;
+using KenticoCommunity.ContentReferenceUi.Core;
 using System;
 using System.Linq;
 
 namespace KenticoCommunity.ContentReferenceUi.Installers
 {
-    internal class ContentReferenceUiInstaller
+    internal class ContentReferenceUiInstaller : IContentReferenceUiInstaller
     {
         private readonly IEventLogService _eventLogService;
         private readonly IResourceInfoProvider _resourceInfoProvider;
@@ -30,7 +31,7 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
             _siteInfoProvider = siteInfoProvider;
         }
 
-        public void Installer()
+        public void Install()
         {
             var resourceInfo = InstallResourceInfo();
 
@@ -57,13 +58,13 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
         private ResourceInfo InstallResourceInfo()
         {
             var resourceInfo = _resourceInfoProvider.Get(ResourceConstants.ResourceName);
-            if(InstalledModuleIsCurrent(resourceInfo))
+            if (InstalledModuleIsCurrent(resourceInfo))
             {
                 LogInformation("CURRENT", $"The '{ResourceConstants.ResourceName}' module is already installed and current.");
                 return resourceInfo;
             }
 
-            if(resourceInfo == null)
+            if (resourceInfo == null)
             {
                 resourceInfo = new ResourceInfo();
             }
@@ -130,7 +131,7 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
         private PageTemplateInfo GetPageTemplateInfo(string pageTemplateCodeName)
         {
             var pageTemplateInfo = PageTemplateInfoProvider.GetPageTemplateInfo(pageTemplateCodeName);
-            if(pageTemplateInfo == null)
+            if (pageTemplateInfo == null)
             {
                 throw new ArgumentOutOfRangeException($"Kentico's system page template, {pageTemplateCodeName} is missing!");
             }

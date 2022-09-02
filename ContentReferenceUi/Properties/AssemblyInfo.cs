@@ -36,3 +36,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("0.0.0.8")]
 [assembly: AssemblyFileVersion("0.0.0.8")]
 [assembly: AssemblyDiscoverable()]
+[assembly: InternalsVisibleTo("KenticoCommunity.ContentReferenceUi.IntegrationTests")]
