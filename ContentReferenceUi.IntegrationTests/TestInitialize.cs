@@ -7,10 +7,10 @@ using KenticoCommunity.ContentReferenceUi.Core;
 namespace KenticoCommunity.ContentReferenceUi.IntegrationTests
 {
     [TestClass]
-    public class TestInitialize
+    public static class TestInitialize
     {
         [AssemblyInitialize]
-        public void Initialize()
+        public static void AssemblyInit(TestContext context)
         {
             Service.Use<IContentReferenceUiInstaller, ContentReferenceUiInstaller>();
             CMSApplication.Init();

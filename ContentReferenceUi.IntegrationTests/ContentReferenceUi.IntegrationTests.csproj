@@ -38,6 +38,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.14.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
       <HintPath>..\packages\AngleSharp.0.14.0\lib\net472\AngleSharp.dll</HintPath>
@@ -69,6 +72,10 @@
     <Reference Include="CMS.Base, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.Base.dll</HintPath>
     </Reference>
+    <Reference Include="CMS.Base.Web.UI, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CMS.Base.Web.UI.dll</HintPath>
+    </Reference>
     <Reference Include="CMS.ContactManagement, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.ContactManagement.dll</HintPath>
     </Reference>
@@ -93,6 +100,9 @@
     <Reference Include="CMS.Ecommerce, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.Ecommerce.dll</HintPath>
     </Reference>
+    <Reference Include="CMS.Ecommerce.Web.UI">
+      <HintPath>..\Lib\CMS.Ecommerce.Web.UI.dll</HintPath>
+    </Reference>
     <Reference Include="CMS.EmailEngine, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.EmailEngine.dll</HintPath>
     </Reference>
@@ -102,8 +112,16 @@
     <Reference Include="CMS.FormEngine, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.FormEngine.dll</HintPath>
     </Reference>
+    <Reference Include="CMS.FormEngine.Web.UI, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CMS.FormEngine.Web.UI.dll</HintPath>
+    </Reference>
     <Reference Include="CMS.Globalization, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.Globalization.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.Globalization.Web.UI, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CMS.Globalization.Web.UI.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Helpers, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.Helpers.dll</HintPath>
@@ -143,6 +161,10 @@
     </Reference>
     <Reference Include="CMS.Personas, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.Personas.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.PortalEngine.Web.UI, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CMS.PortalEngine.Web.UI.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Relationships, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.Relationships.dll</HintPath>
@@ -186,6 +208,9 @@
     <Reference Include="CMS.Synchronization, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.Synchronization.dll</HintPath>
     </Reference>
+    <Reference Include="CMS.Synchronization.WSE3">
+      <HintPath>..\..\kx13-dancing-goat-sample\src\Lib\CMS.Synchronization.WSE3.dll</HintPath>
+    </Reference>
     <Reference Include="CMS.SynchronizationEngine, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.SynchronizationEngine.dll</HintPath>
     </Reference>
@@ -195,8 +220,16 @@
     <Reference Include="CMS.TranslationServices, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.TranslationServices.dll</HintPath>
     </Reference>
+    <Reference Include="CMS.UIControls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CMS.UIControls.dll</HintPath>
+    </Reference>
     <Reference Include="CMS.WebAnalytics, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.WebAnalytics.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.WebApi, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CMS.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="CMS.WebFarmSync, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Xperience.Libraries.13.0.0\lib\NET48\CMS.WebFarmSync.dll</HintPath>
@@ -537,13 +570,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.S3.3.3.104.36\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ContentReferenceUi\ContentReferenceUi.csproj">
       <Project>{0374cee8-6a4c-4bc9-ab21-2fe43366e92f}</Project>
       <Name>ContentReferenceUi</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\AWSSDK.S3.3.3.104.36\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

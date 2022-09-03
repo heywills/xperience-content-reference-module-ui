@@ -531,9 +531,9 @@
     <None Include="BuildPackage.bat" />
     <Compile Include="Constants\ResourceConstants.cs" />
     <Compile Include="Constants\UiElementConstants.cs" />
+    <Compile Include="Core\IContentReferenceUiInstaller.cs" />
     <Compile Include="Extenders\ContentReferenceUniGridExtender.cs" />
     <Compile Include="Installers\ContentReferenceUiInstaller.cs" />
-    <Compile Include="Core\IContentReferenceUiInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="ContentReferenceUi.nuspec" />
     <None Include="packages.config" />
@@ -541,6 +541,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\Grid\Usage.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\Images\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
