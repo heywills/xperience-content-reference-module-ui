@@ -1,4 +1,5 @@
-﻿using CMS.Core;
+﻿using CMS.Base;
+using CMS.Core;
 using CMS.Modules;
 using CMS.PortalEngine;
 using CMS.SiteProvider;
@@ -49,7 +50,14 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
 
         private void AssignModuleToSites(ResourceInfo resourceInfo)
         {
-            var unassignedSites = _siteInfoProvider
+            using (new CMSActionContext
+            {
+                LogSynchronization = false,
+                ContinuousIntegrationAllowObjectSerialization = false
+            })
+            {
+
+                var unassignedSites = _siteInfoProvider
                                     .Get()
                                     .WhereNotIn("SiteID",
                                     _resourceSiteInfoProvider
@@ -60,40 +68,51 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
                                     .Select(siteInfo => siteInfo.SiteID)
                                     .ToList();
 
-            unassignedSites.ForEach(siteId => _resourceSiteInfoProvider
-                                                .Add(resourceInfo.ResourceID, siteId));
-            var unassignedSiteCount = unassignedSites.Count;
-            if (unassignedSiteCount > 0)
-            {
-                LogInformation("ASSIGNED", $"Assigned the module '{ResourceConstants.ResourceDisplayName}' to {unassignedSiteCount} sites.");
+                unassignedSites.ForEach(siteId => _resourceSiteInfoProvider
+                                                    .Add(resourceInfo.ResourceID, siteId));
+                var unassignedSiteCount = unassignedSites.Count;
+                if (unassignedSiteCount > 0)
+                {
+                    LogInformation("ASSIGNED", $"Assigned the module '{ResourceConstants.ResourceDisplayName}' to {unassignedSiteCount} sites.");
+                }
             }
         }
 
         private ResourceInfo InstallResourceInfo()
         {
-            var resourceInfo = _resourceInfoProvider.Get(ResourceConstants.ResourceName);
-            if (InstalledModuleIsCurrent(resourceInfo))
+            using (new CMSActionContext
             {
-                LogInformation("CURRENT", $"The '{ResourceConstants.ResourceDisplayName}' module is already installed and current.");
+                LogSynchronization = false,
+                ContinuousIntegrationAllowObjectSerialization = false
+            })
+            {
+                var resourceInfo = _resourceInfoProvider.Get(ResourceConstants.ResourceName);
+                if (InstalledModuleIsCurrent(resourceInfo))
+                {
+                    LogInformation("CURRENT", $"The '{ResourceConstants.ResourceDisplayName}' module is already installed and current.");
+                    return resourceInfo;
+                }
+                LogInformation("START", $"{(resourceInfo == null ? "Installing" : "Updating")} the module '{ResourceConstants.ResourceDisplayName}'.");
+                if (resourceInfo == null)
+                {
+                    resourceInfo = new ResourceInfo();
+                }
+
+                resourceInfo.ResourceDisplayName = ResourceConstants.ResourceDisplayName;
+                resourceInfo.ResourceName = ResourceConstants.ResourceName;
+                resourceInfo.ResourceDescription = ResourceConstants.ResourceDescription;
+                resourceInfo.ResourceAuthor = ResourceConstants.ResourceAuthor;
+                resourceInfo.ResourceIsInDevelopment = ResourceConstants.ResourceIsInDevelopment;
+                // Setting ResourceInstallationState will cause Kentico to uninstall related objects if it
+                // finds a module meta file in ~\App_Data\CMSModules\CMSInstallation\Packages\Installed
+                resourceInfo.ResourceInstallationState = ResourceConstants.ResourceInstallationState;
+                _resourceInfoProvider.Set(resourceInfo);
+
+                InstallUiElement(resourceInfo);
+                StoreInstalledVersion(resourceInfo);
+                LogInformation("COMPLETE", $"{(resourceInfo == null ? "Install" : "Update")} of the module '{ResourceConstants.ResourceDisplayName}' version {resourceInfo.ResourceVersion} is complete.");
                 return resourceInfo;
             }
-            LogInformation("START", $"{(resourceInfo == null ? "Installing": "Updating")} the module '{ResourceConstants.ResourceDisplayName}'.");
-            if (resourceInfo == null)
-            {
-                resourceInfo = new ResourceInfo();
-            }
-
-            resourceInfo.ResourceDisplayName = ResourceConstants.ResourceDisplayName;
-            resourceInfo.ResourceName = ResourceConstants.ResourceName;
-            resourceInfo.ResourceDescription = ResourceConstants.ResourceDescription;
-            resourceInfo.ResourceAuthor = ResourceConstants.ResourceAuthor;
-            resourceInfo.ResourceIsInDevelopment = ResourceConstants.ResourceIsInDevelopment;
-            _resourceInfoProvider.Set(resourceInfo);
-
-            InstallUiElement(resourceInfo);
-            StoreInstalledVersion(resourceInfo);
-            LogInformation("COMPLETE", $"{(resourceInfo == null ? "Install" : "Update")} of the module '{ResourceConstants.ResourceDisplayName}' version {resourceInfo.ResourceVersion} is complete.");
-            return resourceInfo;
         }
 
 
@@ -105,33 +124,48 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
         /// <param name="resourceInfo"></param>
         private void StoreInstalledVersion(ResourceInfo resourceInfo)
         {
-            string newVersion = GetAssemblyVersion();
-            resourceInfo.ResourceInstalledVersion = newVersion;
-            resourceInfo.ResourceVersion = newVersion;
-            _resourceInfoProvider.Set(resourceInfo);
+            using (new CMSActionContext
+            {
+                LogSynchronization = false,
+                ContinuousIntegrationAllowObjectSerialization = false
+            })
+            {
+                string newVersion = GetAssemblyVersion();
+                resourceInfo.ResourceInstalledVersion = newVersion;
+                resourceInfo.ResourceVersion = newVersion;
+                _resourceInfoProvider.Set(resourceInfo);
+            }
         }
 
         private void InstallUiElement(ResourceInfo resourceInfo)
         {
-            // NOTE: The static method GetUIElementInfo has significant optimizations for this
-            // query that are not provided by the injected implementation.
-            var uiElement = UIElementInfoProvider.GetUIElementInfo(resourceInfo.ResourceName, UiElementConstants.ElementName)
+            using (new CMSActionContext
+            {
+                LogSynchronization = false,
+                ContinuousIntegrationAllowObjectSerialization = false
+            })
+            {
+                // NOTE: The static method GetUIElementInfo has significant optimizations for this
+                // query that are not provided by the injected implementation.
+                var uiElement = UIElementInfoProvider.GetUIElementInfo(resourceInfo.ResourceName, UiElementConstants.ElementName)
                             ??
                             new UIElementInfo();
-            uiElement.ElementResourceID = resourceInfo.ResourceID;
-            uiElement.ElementName = UiElementConstants.ElementName;
-            uiElement.ElementDisplayName = UiElementConstants.ElementDisplayName;
-            uiElement.ElementCaption = UiElementConstants.ElementCaption;
-            uiElement.ElementIsCustom = UiElementConstants.ElementIsCustom;
-            uiElement.ElementType = UIElementTypeEnum.PageTemplate;
-            uiElement.ElementPageTemplateID = GetPageTemplateInfo(UiElementConstants.ElementPageTemplateCodeName)
-                                              .PageTemplateId;
+                uiElement.ElementResourceID = resourceInfo.ResourceID;
+                uiElement.ElementName = UiElementConstants.ElementName;
+                uiElement.ElementDisplayName = UiElementConstants.ElementDisplayName;
+                uiElement.ElementCaption = UiElementConstants.ElementCaption;
+                uiElement.ElementIsCustom = UiElementConstants.ElementIsCustom;
+                uiElement.ElementRequiresGlobalAdminPriviligeLevel = UiElementConstants.ElementRequiresGlobalAdminPriviligeLevel;
+                uiElement.ElementType = UIElementTypeEnum.PageTemplate;
+                uiElement.ElementPageTemplateID = GetPageTemplateInfo(UiElementConstants.ElementPageTemplateCodeName)
+                                                  .PageTemplateId;
 
-            uiElement.ElementParentID = GetSystemUiElementInfo(UiElementConstants.ParentElementResourceName, UiElementConstants.ParentElementName)
-                                        .ElementID;
+                uiElement.ElementParentID = GetSystemUiElementInfo(UiElementConstants.ParentElementResourceName, UiElementConstants.ParentElementName)
+                                            .ElementID;
 
-            uiElement.ElementProperties = UiElementConstants.ElementProperties;
-            _uIElementInfoProvider.Set(uiElement);
+                uiElement.ElementProperties = UiElementConstants.ElementProperties;
+                _uIElementInfoProvider.Set(uiElement);
+            }
         }
 
         private UIElementInfo GetSystemUiElementInfo(string resourceName, string uiElementName)
