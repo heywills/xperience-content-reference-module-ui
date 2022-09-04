@@ -5,8 +5,9 @@
         public const string ElementName = "KenticoCommunity.ContentUsage";
         public const string ElementDisplayName = "Usage";
         public const string ElementCaption = "Usage";
-        public const string ElementPageTemplateCodeName = "Listing";
-        public const string ParentElementResourceName = "CMS.Content";
+		public const bool ElementIsCustom = false;
+		public const string ElementPageTemplateCodeName = "Listing";
+		public const string ParentElementResourceName = "CMS.Content";
         public const string ParentElementName = "Edit";
         public const string ElementProperties =
 @"<Data>

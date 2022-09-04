@@ -33,9 +33,18 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
 
         public void Install()
         {
-            var resourceInfo = InstallResourceInfo();
+            try
+            {
+                var resourceInfo = InstallResourceInfo();
 
-            AssignModuleToSites(resourceInfo);
+                AssignModuleToSites(resourceInfo);
+            }
+            catch(Exception ex)
+            {
+                _eventLogService.LogException(nameof(ContentReferenceUiInstaller),
+                                              "ERROR",
+                                              ex);
+            }
         }
 
         private void AssignModuleToSites(ResourceInfo resourceInfo)
@@ -53,6 +62,11 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
 
             unassignedSites.ForEach(siteId => _resourceSiteInfoProvider
                                                 .Add(resourceInfo.ResourceID, siteId));
+            var unassignedSiteCount = unassignedSites.Count;
+            if (unassignedSiteCount > 0)
+            {
+                LogInformation("ASSIGNED", $"Assigned the module '{ResourceConstants.ResourceDisplayName}' to {unassignedSiteCount} sites.");
+            }
         }
 
         private ResourceInfo InstallResourceInfo()
@@ -60,16 +74,16 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
             var resourceInfo = _resourceInfoProvider.Get(ResourceConstants.ResourceName);
             if (InstalledModuleIsCurrent(resourceInfo))
             {
-                LogInformation("CURRENT", $"The '{ResourceConstants.ResourceName}' module is already installed and current.");
+                LogInformation("CURRENT", $"The '{ResourceConstants.ResourceDisplayName}' module is already installed and current.");
                 return resourceInfo;
             }
-
+            LogInformation("START", $"{(resourceInfo == null ? "Installing": "Updating")} the module '{ResourceConstants.ResourceDisplayName}'.");
             if (resourceInfo == null)
             {
                 resourceInfo = new ResourceInfo();
             }
 
-            resourceInfo.ResourceDisplayName = ResourceConstants.ResourceDisplayname;
+            resourceInfo.ResourceDisplayName = ResourceConstants.ResourceDisplayName;
             resourceInfo.ResourceName = ResourceConstants.ResourceName;
             resourceInfo.ResourceDescription = ResourceConstants.ResourceDescription;
             resourceInfo.ResourceAuthor = ResourceConstants.ResourceAuthor;
@@ -78,6 +92,7 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
 
             InstallUiElement(resourceInfo);
             StoreInstalledVersion(resourceInfo);
+            LogInformation("COMPLETE", $"{(resourceInfo == null ? "Install" : "Update")} of the module '{ResourceConstants.ResourceDisplayName}' version {resourceInfo.ResourceVersion} is complete.");
             return resourceInfo;
         }
 
@@ -107,6 +122,7 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
             uiElement.ElementName = UiElementConstants.ElementName;
             uiElement.ElementDisplayName = UiElementConstants.ElementDisplayName;
             uiElement.ElementCaption = UiElementConstants.ElementCaption;
+            uiElement.ElementIsCustom = UiElementConstants.ElementIsCustom;
             uiElement.ElementType = UIElementTypeEnum.PageTemplate;
             uiElement.ElementPageTemplateID = GetPageTemplateInfo(UiElementConstants.ElementPageTemplateCodeName)
                                               .PageTemplateId;

@@ -534,6 +534,7 @@
     <Compile Include="Core\IContentReferenceUiInstaller.cs" />
     <Compile Include="Extenders\ContentReferenceUniGridExtender.cs" />
     <Compile Include="Installers\ContentReferenceUiInstaller.cs" />
+    <Compile Include="Modules\ContentReferenceUiInstallerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="ContentReferenceUi.nuspec" />
     <None Include="packages.config" />
