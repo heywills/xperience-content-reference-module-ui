@@ -7,6 +7,8 @@ It creates two artifacts that will cause Kentico to track the installation
 of the module, so that when the NuGet package is uninstalled it will automatically
 delete the Kentico database objects related to the module.
 
+If you don't care about uninstalling the module, these artifacts are not needed.
+
 ** Module meta file **
 ~\App_Data\CMSModules\CMSInstallation\Packages\[module name]_[version].xml
 

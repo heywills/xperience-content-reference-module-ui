@@ -24,6 +24,5 @@
          be redundant copies of the files in the Nuget package. -->
     <file src="content\App_Data\**" target="content\App_Data"/>
     <file src="content\CMSModules\**" target="content\CMSModules" />
-    <file src="tools\Install.ps1" target="tools\Install.ps1" />
   </files>
 </package>
