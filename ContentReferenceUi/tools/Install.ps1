@@ -61,7 +61,26 @@ function SetFileProperties
     Write-Host $message
     $item.Properties.Item("BuildAction").Value = $buildAction
 }
+
+function SetCmsModuleFilesProperties
+{
+    $project.ProjectItems | where-object {$_.Name -eq "CMSModules"} | 
+        foreach-object { $_.ProjectItems } | where-object {$_.Name -eq $package.id} | 
+        SetFilePropertiesRecursively $_
+}
+
+function SetPackageMetaFileProperties
+{
+    $project.ProjectItems | where-object {$_.Name -eq "App_Data"} | 
+        foreach-object { $_.ProjectItems } | where-object {$_.Name -eq "CMSModules"} | 
+        foreach-object { $_.ProjectItems } | where-object {$_.Name -eq "CMSInstallation"} | 
+        foreach-object { $_.ProjectItems } | where-object {$_.Name -eq "Packages"} | 
+        foreach-object { $_.ProjectItems } | where-object {$_.Name -like "KenticoCommunity.ContentReferenceUi_*.xml"} | 
+        SetFileProperties $_
+}
+
+SetCmsModuleFilesProperties
+SetPackageMetaFileProperties
  
-$cmsModulesItem = $project.ProjectItems.Item("CMSModules")
-$thisModuleItem = $cmsModulesItem.ProjectItems.Item($package.id)
-SetFilePropertiesRecursively $thisModuleItem
+
+
