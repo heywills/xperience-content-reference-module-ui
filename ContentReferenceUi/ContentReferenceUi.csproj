@@ -532,10 +532,8 @@
     <Compile Include="Constants\ResourceConstants.cs" />
     <Compile Include="Constants\UiElementConstants.cs" />
     <Compile Include="Core\IContentReferenceUiInstaller.cs" />
-    <Compile Include="Core\IModuleInstallationMetaDataFileWriter.cs" />
     <Compile Include="Extenders\ContentReferenceUniGridExtender.cs" />
     <Compile Include="Installers\ContentReferenceUiInstaller.cs" />
-    <Compile Include="Installers\ModuleInstallationMetaDataFileWriter.cs" />
     <Compile Include="Modules\ContentReferenceUiInstallerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="ContentReferenceUi.nuspec" />

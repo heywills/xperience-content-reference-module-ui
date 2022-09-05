@@ -17,22 +17,19 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
         private readonly IUIElementInfoProvider _uIElementInfoProvider;
         private readonly IResourceSiteInfoProvider _resourceSiteInfoProvider;
         private readonly ISiteInfoProvider _siteInfoProvider;
-        private readonly IModuleInstallationMetaDataFileWriter _moduleInstallationMetaDataFileWriter;
 
 
         public ContentReferenceUiInstaller(IEventLogService eventLogService,
                                            IResourceInfoProvider resourceInfoProvider,
                                            IUIElementInfoProvider uIElementInfoProvider,
                                            IResourceSiteInfoProvider resourceSiteInfoProvider,
-                                           ISiteInfoProvider siteInfoProvider,
-                                           IModuleInstallationMetaDataFileWriter moduleInstallationMetaDataFileWriter)
+                                           ISiteInfoProvider siteInfoProvider)
         {
             _eventLogService = eventLogService;
             _resourceInfoProvider = resourceInfoProvider;
             _uIElementInfoProvider = uIElementInfoProvider;
             _resourceSiteInfoProvider = resourceSiteInfoProvider;
             _siteInfoProvider = siteInfoProvider;
-            _moduleInstallationMetaDataFileWriter = moduleInstallationMetaDataFileWriter;
         }
 
         public void Install()
@@ -41,7 +38,6 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
             {
                 var resourceInfo = InstallResourceInfo();
                 AssignModuleToSites(resourceInfo);
-                EnsureModuleInstallationMetaDataFile(resourceInfo);
             }
             catch(Exception ex)
             {
@@ -119,18 +115,6 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
         }
 
         /// <summary>
-        /// Ensure a module meta file exists in ~\App_Data\CMSModules\CMSInstallation\Packages\Installed
-        /// so that if this module assembly is removed, Kentico will clean up the module objects
-        /// from the database.
-        /// </summary>
-        /// <param name="resourceInfo"></param>
-        private void EnsureModuleInstallationMetaDataFile(ResourceInfo resourceInfo)
-        {
-            _moduleInstallationMetaDataFileWriter.EnsureModuleMetaDataFiles(resourceInfo);
-        }
-
-
-        /// <summary>
         /// Store the version number of the installed module. This should
         /// be done after the ResourceInfo and UiElementInfo are successfully
         /// updated and saved.
@@ -144,7 +128,7 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
                 ContinuousIntegrationAllowObjectSerialization = false
             })
             {
-                string newVersion = GetAssemblyVersion();
+                string newVersion = GetModuleVersionFromAssembly();
                 resourceInfo.ResourceInstalledVersion = newVersion;
                 resourceInfo.ResourceVersion = newVersion;
                 _resourceInfoProvider.Set(resourceInfo);
@@ -206,12 +190,17 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
         private bool InstalledModuleIsCurrent(ResourceInfo resourceInfo)
         {
             return (resourceInfo != null) &&
-                   (GetAssemblyVersion() == resourceInfo.ResourceInstalledVersion);
+                   (GetModuleVersionFromAssembly() == resourceInfo.ResourceInstalledVersion);
         }
 
-        private string GetAssemblyVersion()
+        /// <summary>
+        /// Create a Module version number from the assembly version.
+        /// The module version must be in 3 parts (e.g. 1.0.13).
+        /// </summary>
+        /// <returns></returns>
+        private string GetModuleVersionFromAssembly()
         {
-            return this.GetType().Assembly.GetName().Version.ToString();
+            return this.GetType().Assembly.GetName().Version.ToString(3);
         }
 
         private void LogInformation(string eventCode, string eventMessage)

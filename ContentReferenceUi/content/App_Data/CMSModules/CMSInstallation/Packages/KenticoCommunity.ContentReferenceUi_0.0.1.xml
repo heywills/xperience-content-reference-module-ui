@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- 
+This file must be installed and uninstalled with the NuGet package.
+Kentico will look for this file to signal whether or not the module
+is supposed to be installed.
+If it finds it at ~\App_Data\CMSModules\CMSInstallation\Packages\ it
+will keep the module installed.
+It will then copy it to ~\App_Data\CMSModules\CMSInstallation\Packages\Installed\.
+
+But when the NuGet package is uninstalled, the original file is removed, and
+Kentico will find the one copied to "Installed" 
+Kentico will uninstall the Kentico database objects related to this module, and
+delete the one copied to "Installed".
+-->
+<moduleInstallationMetaData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <name>KenticoCommunity.ContentReferenceUi</name>
+  <version>0.0.1</version>
+</moduleInstallationMetaData>
