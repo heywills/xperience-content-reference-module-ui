@@ -348,3 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Ignore build-generated module export file
+ContentReferenceUi/content/App_Data/CMSModules/KenticoCommunity.ContentReferenceUi/Install/
