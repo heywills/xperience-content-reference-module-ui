@@ -7,7 +7,7 @@
 		<authors>Kentico Community</authors>
 		<owners>Kentico Community</owners>
 		<projectUrl>https://github.com/heywills/xperience-content-reference-module-ui</projectUrl>
-		<icon>content/CMSModules/KenticoCommunity.ContentReferenceUi/Images/icon.png</icon>
+    <icon>content/CMSModules/KenticoCommunity.ContentReferenceUi/Images/icon.png </icon>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<license type="expression">MIT</license>
 		<description>$description$</description>
@@ -20,7 +20,16 @@
     </dependencies>
 	</metadata>
 	<files>
-    <file src="CMSModules\*" target="CMSModules\" />
+    <!-- Don't include the "content" folder in the Visual Studio project or there will
+         be redundant copies of the files in the Nuget package. -->
+
+    <!-- The module version is used in the name of the module metadata file.
+         Kentico watches for this file to be removed. When it is, it knows
+         the NuGet package is uninstalled and it will remove the Kentico database
+         objects related to the module. -->
+    <file src="content\App_Data\CMSModules\CMSInstallation\Packages\KenticoCommunity.ContentReferenceUi_VERSION.xml"
+          target="content\App_Data\CMSModules\CMSInstallation\Packages\KenticoCommunity.ContentReferenceUi_$version$.xml"/>
+    <file src="content\CMSModules\**" target="content\CMSModules" />
     <file src="tools\Install.ps1" target="tools\Install.ps1" />
   </files>
 </package>

@@ -25,6 +25,7 @@ namespace KenticoCommunity.ContentReferenceUi.Modules
         {
             base.OnPreInit();
             Service.Use<IContentReferenceUiInstaller, ContentReferenceUiInstaller>();
+            Service.Use<IModuleInstallationMetaDataFileWriter, ModuleInstallationMetaDataFileWriter>();
         }
 
         /// <summary>

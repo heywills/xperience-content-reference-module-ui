@@ -532,21 +532,15 @@
     <Compile Include="Constants\ResourceConstants.cs" />
     <Compile Include="Constants\UiElementConstants.cs" />
     <Compile Include="Core\IContentReferenceUiInstaller.cs" />
+    <Compile Include="Core\IModuleInstallationMetaDataFileWriter.cs" />
     <Compile Include="Extenders\ContentReferenceUniGridExtender.cs" />
     <Compile Include="Installers\ContentReferenceUiInstaller.cs" />
+    <Compile Include="Installers\ModuleInstallationMetaDataFileWriter.cs" />
     <Compile Include="Modules\ContentReferenceUiInstallerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="ContentReferenceUi.nuspec" />
     <None Include="packages.config" />
     <None Include="tools\Install.ps1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\Grid\Usage.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CMSModules\KenticoCommunity.ContentReferenceUi\Images\icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.S3.3.3.104.36\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />

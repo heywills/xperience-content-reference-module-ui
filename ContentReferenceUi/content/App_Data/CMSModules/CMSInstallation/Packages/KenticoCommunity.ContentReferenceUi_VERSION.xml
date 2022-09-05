@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!-- 
+This file must be installed and uninstalled with the NuGet package.
+Kentico will look for this file to signal whether or not the module
+is supposed to be installed.
+If it finds it at ~\App_Data\CMSModules\CMSInstallation\Packages\ it
+will keep the module installed.
+But when the NuGet package is uninstalled, this file is removed, and
+Kentico also finds the same metadata file at 
+~\App_Data\CMSModules\CMSInstallation\Packages\Installed\
+Kentico will uninstall the Kentico database objects related to this module.
+
+The custom module code is going to overwrite this file after it is deployed
+with NuGet, because the module is going to ensure it is not accidentally uninstalled
+when this file is missing (perhaps its accidentally excluded from a deployment).
+Therefore, it might as well write the expected contents, including the correct
+module version number.
+
+Whent the NuGet package is built, a variable will be used to add the
+version number to the name of this file (e.g. KenticoCommunity.ContentReferenceUi_1.0.0.13.xml.
+This naming convestion is required by Kentico.
+
+Below is an example of what the module metadata will look like after
+the module code writes to this file.
+-->
+<moduleInstallationMetaData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <name>KenticoCommunity.ContentReferenceUi</name>
+  <version>1.0.0.13</version>
+</moduleInstallationMetaData>

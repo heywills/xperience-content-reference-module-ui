@@ -17,19 +17,22 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
         private readonly IUIElementInfoProvider _uIElementInfoProvider;
         private readonly IResourceSiteInfoProvider _resourceSiteInfoProvider;
         private readonly ISiteInfoProvider _siteInfoProvider;
+        private readonly IModuleInstallationMetaDataFileWriter _moduleInstallationMetaDataFileWriter;
 
 
         public ContentReferenceUiInstaller(IEventLogService eventLogService,
                                            IResourceInfoProvider resourceInfoProvider,
                                            IUIElementInfoProvider uIElementInfoProvider,
                                            IResourceSiteInfoProvider resourceSiteInfoProvider,
-                                           ISiteInfoProvider siteInfoProvider)
+                                           ISiteInfoProvider siteInfoProvider,
+                                           IModuleInstallationMetaDataFileWriter moduleInstallationMetaDataFileWriter)
         {
             _eventLogService = eventLogService;
             _resourceInfoProvider = resourceInfoProvider;
             _uIElementInfoProvider = uIElementInfoProvider;
             _resourceSiteInfoProvider = resourceSiteInfoProvider;
             _siteInfoProvider = siteInfoProvider;
+            _moduleInstallationMetaDataFileWriter = moduleInstallationMetaDataFileWriter;
         }
 
         public void Install()
@@ -37,8 +40,8 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
             try
             {
                 var resourceInfo = InstallResourceInfo();
-
                 AssignModuleToSites(resourceInfo);
+                EnsureModuleInstallationMetaDataFile(resourceInfo);
             }
             catch(Exception ex)
             {
@@ -103,7 +106,7 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
                 resourceInfo.ResourceDescription = ResourceConstants.ResourceDescription;
                 resourceInfo.ResourceAuthor = ResourceConstants.ResourceAuthor;
                 resourceInfo.ResourceIsInDevelopment = ResourceConstants.ResourceIsInDevelopment;
-                // Setting ResourceInstallationState will cause Kentico to uninstall related objects if it
+                // Setting ResourceInstallationState to 'installed' will cause Kentico to uninstall related objects if it
                 // finds a module meta file in ~\App_Data\CMSModules\CMSInstallation\Packages\Installed
                 resourceInfo.ResourceInstallationState = ResourceConstants.ResourceInstallationState;
                 _resourceInfoProvider.Set(resourceInfo);
@@ -113,6 +116,17 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
                 LogInformation("COMPLETE", $"{(resourceInfo == null ? "Install" : "Update")} of the module '{ResourceConstants.ResourceDisplayName}' version {resourceInfo.ResourceVersion} is complete.");
                 return resourceInfo;
             }
+        }
+
+        /// <summary>
+        /// Ensure a module meta file exists in ~\App_Data\CMSModules\CMSInstallation\Packages\Installed
+        /// so that if this module assembly is removed, Kentico will clean up the module objects
+        /// from the database.
+        /// </summary>
+        /// <param name="resourceInfo"></param>
+        private void EnsureModuleInstallationMetaDataFile(ResourceInfo resourceInfo)
+        {
+            _moduleInstallationMetaDataFileWriter.EnsureModuleMetaDataFiles(resourceInfo);
         }
 
 
