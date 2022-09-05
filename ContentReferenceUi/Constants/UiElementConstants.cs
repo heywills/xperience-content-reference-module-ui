@@ -7,6 +7,7 @@
         public const string ElementCaption = "Usage";
 		public const bool ElementIsCustom = false;
 		public const bool ElementRequiresGlobalAdminPriviligeLevel = false;
+		public const int ElementOrder = 6;
 		public const string ElementPageTemplateCodeName = "Listing";
 		public const string ParentElementResourceName = "CMS.Content";
         public const string ParentElementName = "Edit";

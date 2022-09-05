@@ -170,6 +170,7 @@ namespace KenticoCommunity.ContentReferenceUi.Installers
                 uiElement.ElementCaption = UiElementConstants.ElementCaption;
                 uiElement.ElementIsCustom = UiElementConstants.ElementIsCustom;
                 uiElement.ElementRequiresGlobalAdminPriviligeLevel = UiElementConstants.ElementRequiresGlobalAdminPriviligeLevel;
+                uiElement.ElementOrder = UiElementConstants.ElementOrder;
                 uiElement.ElementType = UIElementTypeEnum.PageTemplate;
                 uiElement.ElementPageTemplateID = GetPageTemplateInfo(UiElementConstants.ElementPageTemplateCodeName)
                                                   .PageTemplateId;
