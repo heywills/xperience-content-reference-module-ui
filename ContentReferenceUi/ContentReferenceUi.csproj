@@ -536,6 +536,7 @@
     <Compile Include="Installers\ContentReferenceUiInstaller.cs" />
     <Compile Include="Modules\ContentReferenceUiInstallerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="build\post-build.ps1" />
     <None Include="ContentReferenceUi.nuspec" />
     <None Include="packages.config" />
     <None Include="tools\Install.ps1" />
@@ -544,4 +545,7 @@
     <Analyzer Include="..\packages\AWSSDK.S3.3.3.104.36\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File $(ProjectDir)\build\post-build.ps1 -projectDir "$(ProjectDir)\" -assemblyPath $(TargetPath)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
