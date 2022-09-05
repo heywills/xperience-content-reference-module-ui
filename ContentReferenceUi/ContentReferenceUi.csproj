@@ -539,7 +539,6 @@
     <None Include="build\post-build.ps1" />
     <None Include="ContentReferenceUi.nuspec" />
     <None Include="packages.config" />
-    <None Include="tools\Install.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.S3.3.3.104.36\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
