@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>$id$</id>
+		<version>$version$</version>
+		<title>$title$</title>
+		<authors>Kentico Community</authors>
+		<owners>Kentico Community</owners>
+		<projectUrl>https://github.com/heywills/xperience-content-reference-module-ui</projectUrl>
+    <icon>content/CMSModules/KenticoCommunity.ContentReferenceUi/Images/icon.png </icon>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">MIT</license>
+		<description>$description$</description>
+		<releaseNotes/>
+		<copyright>2022 Kentico Community</copyright>
+		<tags>Kentico Xperience Atomic Content References</tags>
+		<dependencies>
+			<dependency id="Kentico.Xperience.Libraries" version="[13.0.0,13.1.0)" />
+      <dependency id="XperienceCommunity.ContentReferenceModule" version="[1.0.0,1.1.0)" />
+    </dependencies>
+	</metadata>
+	<files>
+    <!-- Don't include the "content" folder in the Visual Studio project or there will
+         be redundant copies of the files in the Nuget package. -->
+    <file src="content\App_Data\**" target="content\App_Data"/>
+    <file src="content\CMSModules\**" target="content\CMSModules" />
+  </files>
+</package>
